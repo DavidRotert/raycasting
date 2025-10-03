@@ -41,10 +41,10 @@ void Player::draw() const
     DrawLineV(this->pos, debugRayEndPos, YELLOW);
 
     // Draw 2 intersect points
-    RayIntersectionPair lastIntersect = get_first_ray_intersection(this->getPositionRelativeToMap(), this->rotationAngleRadian);
+    /*RayIntersectionPair lastIntersect = get_first_ray_intersection(this->getPositionRelativeToMap(), this->rotationAngleRadian);
     for (int i = 0; i < 1; ++i)
     {
         DrawCircleV( get_absolute_position_on_map(lastIntersect.intersect1), 2, GREEN);
         DrawCircleV( get_absolute_position_on_map(lastIntersect.intersect2), 2, GREEN);
-    }
+    }*/
 }

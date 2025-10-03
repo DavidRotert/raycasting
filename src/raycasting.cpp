@@ -1,73 +1,54 @@
 #include "raycasting.hpp"
 
 #include "raymath.h"
+#include "utils.hpp"
 
-RayIntersectionPair get_first_ray_intersection(Vector2 startPosition, radian rotationAngle)
+Vector2 Vector2Delta(const Vector2 a, const Vector2 b)
 {
-    float intersect1X;
-    float intersect1Y;
-    float intersect2X = 0;
-    float intersect2Y = 0;
-
-
-
-    if (rotationAngle > 270 * DEG2RAD)
-    {
-        // Calculate upward right facing
-        intersect1X = ceilf(startPosition.x);
-        const float difY = tanf(2 * PI - rotationAngle) * (ceilf(startPosition.x) - startPosition.x);
-        intersect1Y = startPosition.y - difY;
-    } else if (rotationAngle == 270 * DEG2RAD)
-    {
-        // Calculate upward facing
-        intersect1X = startPosition.x;
-        intersect1Y = floorf(startPosition.y);
-    } else if (rotationAngle > 180 * DEG2RAD)
-    {
-        // Calculate upward left facing
-        intersect1X = floorf(startPosition.x);
-        const float difY = tanf(rotationAngle - PI) * (floorf(startPosition.x) - startPosition.x);
-        intersect1Y = startPosition.y + difY;
-    } else if (rotationAngle == 180 * DEG2RAD)
-    {
-        // Calculate left facing
-        intersect1X = ceilf(startPosition.x) - 1;
-        intersect1Y = startPosition.y;
-    } else if (rotationAngle > 90 * DEG2RAD)
-    {
-        // Calculate downward left facing
-        intersect1X = floorf(startPosition.x);
-        const float difY = tanf(PI - rotationAngle) * (floorf(startPosition.x) - startPosition.x);
-        intersect1Y = startPosition.y - difY;
-    } else if (rotationAngle == 90 * DEG2RAD)
-    {
-        // Calculate downward facing
-        intersect1X = startPosition.x;
-        intersect1Y = ceilf(startPosition.y);
-    } else if (rotationAngle > 0)
-    {
-        // Calculate downward right facing
-        intersect1X = ceilf(startPosition.x);
-        const float dif1Y = tanf(rotationAngle) * (ceilf(startPosition.x) - startPosition.x);
-        intersect1Y = startPosition.y + dif1Y;
-
-        intersect2X = startPosition.x + 1;
-        const float dif2Y = tanf(rotationAngle) * (ceilf(startPosition.x) - startPosition.x);
-        intersect2Y = startPosition.y + dif2Y;
-    } else
-    {
-        // Calculate right facing
-        intersect1X = floorf(startPosition.x) + 1;
-        intersect1Y = startPosition.y;
-
-        intersect2X = floorf(startPosition.x) + 2;
-        intersect2Y = startPosition.y;
-    }
-
-    return RayIntersectionPair{Vector2{intersect1X, intersect1Y}, Vector2{intersect2X, intersect2Y}};
+    return Vector2(fabsf(a.x - b.x), fabsf(a.y - b.y));
 }
 
-int add(int a, int b)
+Vector2 Vector2PythagorasScale(const Vector2 a, const Vector2 b)
 {
-    return a + b;
+    Vector2 delta = Vector2Delta(a, b);
+    return Vector2{sqrtf(1 + delta.y / delta.x), sqrtf(1 + delta.x / delta.y)};
+}
+
+std::vector<MapDataType> cast_ray_with_path(const Map& map, int mapSizeHorizontal, int mapSizeVertical, const Vector2 startPoint, const Vector2 direction)
+{
+    std::vector<MapDataType> pathCrossingResult = {};
+    pathCrossingResult.reserve(map.size());
+
+    // FIXME: Add branches for non diagonal directions
+
+    Vector2 scaleValues = Vector2PythagorasScale(startPoint, direction);
+
+    int diffX = startPoint.x < direction.x ? 1 : -1;
+    int diffY = startPoint.y < direction.y ? 1 : -1;
+
+    int testX = startPoint.x;
+    int testY = startPoint.y;
+    float currentXLength = scaleValues.x * testX;
+    float currentYLength = scaleValues.y * testY;
+
+    pathCrossingResult.push_back(testY * mapSizeHorizontal + testX);
+
+    while (testX < mapSizeHorizontal && testY < mapSizeVertical && testX >= 0 && testY >= 0)
+    {
+        if (currentXLength <= currentYLength)
+        {
+            testX += diffX;
+            currentXLength = scaleValues.x * testX;
+
+        }
+        if (currentXLength >= currentYLength)
+        {
+            testY += diffY;
+            currentYLength = scaleValues.y * testY;
+        }
+
+        pathCrossingResult.push_back(testY * mapSizeHorizontal + testX);
+    }
+
+    return pathCrossingResult;
 }

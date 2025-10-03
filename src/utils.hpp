@@ -1,6 +1,8 @@
 #ifndef RAYCASTING_VECTOR_HELPERS_HPP
 #define RAYCASTING_VECTOR_HELPERS_HPP
 
+#include <cmath>
+
 #include "raylib.h"
 
 #define VECTOR2_RIGHT(value) Vector2{value, 0}

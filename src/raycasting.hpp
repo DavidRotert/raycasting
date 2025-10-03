@@ -1,18 +1,14 @@
 #ifndef RAYCASTING_RAYCASTING_HPP
 #define RAYCASTING_RAYCASTING_HPP
 
+#include <vector>
+
 #include "raylib.h"
-#include "utils.hpp"
+#include "Map.hpp"
 
-struct RayIntersectionPair
-{
-    Vector2 intersect1;
-    Vector2 intersect2;
-};
+Vector2 Vector2Delta(Vector2 a, Vector2 b);
+Vector2 Vector2PythagorasScale(Vector2 a, Vector2 b);
 
-RayIntersectionPair get_first_ray_intersection(Vector2 startPosition, radian rotationAngle);
-
-
-int add(int a, int b);
+std::vector<MapDataType> cast_ray_with_path(const Map& map, int mapSizeHorizontal, int mapSizeVertical, Vector2 startPoint, Vector2 direction);
 
 #endif //RAYCASTING_RAYCASTING_HPP
