@@ -9,6 +9,6 @@
 Vector2 Vector2Delta(Vector2 a, Vector2 b);
 Vector2 Vector2PythagorasScale(Vector2 a, Vector2 b);
 
-std::vector<MapDataType> cast_ray_with_path(const Map& map, int mapSizeHorizontal, int mapSizeVertical, Vector2 startPoint, Vector2 direction);
+std::vector<Vector2> cast_ray_with_path(const Map& map, Vector2 startPoint, Vector2 direction);
 
 #endif //RAYCASTING_RAYCASTING_HPP

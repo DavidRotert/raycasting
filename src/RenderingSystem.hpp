@@ -4,6 +4,7 @@
 #include "Player.hpp"
 #include "Map.hpp"
 
+
 struct RenderingSystem
 {
     Player& player;
@@ -11,6 +12,5 @@ struct RenderingSystem
 
     void render() const;
 };
-
 
 #endif //RAYCASTING_RENDERINGSYSTEM_H

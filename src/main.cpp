@@ -16,7 +16,7 @@ int main()
         },
         .rotationAngleRadian = 0 * DEG2RAD,
     };
-    auto map = Map{
+    auto mapData = std::array<MapDataType, MAP_SIZE_HORIZONTAL * MAP_SIZE_VERTICAL>{
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -28,6 +28,7 @@ int main()
         1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     };
+    auto map = Map(MAP_SIZE_HORIZONTAL, MAP_SIZE_VERTICAL, mapData);
 
     auto game = Game(player, map);
     game.gameLoop();

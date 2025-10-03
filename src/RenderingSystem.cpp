@@ -8,7 +8,7 @@ void RenderingSystem::render() const
 
     for (int i = 0; i < MAP_SIZE_VERTICAL * MAP_SIZE_HORIZONTAL; i++)
     {
-        const MapDataType mapData = map.at(i);
+        const MapDataType mapData = map.getMapDataAtIndex(i);
 
         Color color = GRAY;
         if (mapData != 0)

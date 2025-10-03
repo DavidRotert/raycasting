@@ -16,7 +16,7 @@ void Game::gameLoop()
         // Move and rotate
         if (IsKeyDown(KEY_RIGHT))
         {
-            player.rotate(- 5 * DEG2RAD);
+            player.rotate(-5 * DEG2RAD);
         }
         else if (IsKeyDown(KEY_LEFT))
         {
