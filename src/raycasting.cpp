@@ -3,70 +3,67 @@
 #include "raymath.h"
 #include "utils.hpp"
 
-Vector2 Vector2Delta(const Vector2 a, const Vector2 b)
+Vector2 cast_ray(const Map& map, const Vector2 startPoint, const Vector2 directionPoint)
 {
-    return Vector2(fabsf(a.x - b.x), fabsf(a.y - b.y));
-}
+    auto rayDirection = Vector2Normalize(Vector2Subtract(directionPoint, startPoint));
+    auto unitStepValues = Vector2{fabsf(sqrtf(1 + powf(rayDirection.y / rayDirection.x, 2))), fabsf(sqrtf(1 + powf(rayDirection.x / rayDirection.y, 2)))};
 
-Vector2 Vector2PythagorasScale(const Vector2 a, const Vector2 b)
-{
-    Vector2 delta = Vector2Delta(a, b);
-    return Vector2{sqrtf(1 + powf(delta.y / delta.x, 2)), sqrtf(1 + powf(delta.x / delta.y, 2))};
-}
+    auto testPos = Vector2{floor(startPoint.x), floor(startPoint.y)};
 
-std::vector<Vector2> cast_ray_with_path(const Map& map, const Vector2 startPoint, const Vector2 direction)
-{
-    std::vector<Vector2> pathCrossingResult = {};
-    pathCrossingResult.reserve(map.getHorizontalSize() * map.getVerticalSize());
+    float currentXRayLength;
+    float currentYRayLength;
+    float stepX;
+    float stepY;
 
-    // FIXME: Add branches for non diagonal directions
-
-    Vector2 scaleValues = Vector2PythagorasScale(startPoint, direction);
-
-    int diffX = startPoint.x < direction.x ? 1 : -1;
-    int diffY = startPoint.y < direction.y ? 1 : -1;
-
-    auto testPos = Vector2{startPoint.x, startPoint.y};
-    float currentXLength = scaleValues.x;
-    float currentYLength = scaleValues.y;
-
-    pathCrossingResult.push_back(testPos);
-
-    if (map.getMapDataFromRelPos(testPos) != 0)
+    if (rayDirection.x < 0)
     {
-        return pathCrossingResult;
+        stepX = -1;
+        currentXRayLength = (startPoint.x - testPos.x) * unitStepValues.x;
+    }
+    else
+    {
+        stepX = 1;
+        currentXRayLength = (testPos.x + 1 - startPoint.x) * unitStepValues.x;
     }
 
-    bool hit = false;
-    while (testPos.x < map.getHorizontalSize() && testPos.y < map.getVerticalSize() && testPos.x >= 0 && testPos.y >= 0)
+    if (rayDirection.y < 0)
     {
-        if (currentXLength < currentYLength)
+        stepY = -1;
+        currentYRayLength = (startPoint.y - testPos.y) * unitStepValues.y;
+    }
+    else
+    {
+        stepY = 1;
+        currentYRayLength = (testPos.y + 1 - startPoint.y) * unitStepValues.y;
+    }
+
+    float rayLength = 0;
+    while (testPos.x < map.getHorizontalSize() && testPos.y < map.getVerticalSize())
+    {
+        if (currentXRayLength < currentYRayLength)
         {
-            testPos.x += diffX;
-            currentXLength += scaleValues.x;
-        } else if (currentXLength > currentYLength)
+            testPos.x += stepX;
+            rayLength = currentXRayLength;
+            currentXRayLength += unitStepValues.x;
+        } else if (currentXRayLength > currentYRayLength)
         {
-            testPos.y += diffY;
-            currentYLength += scaleValues.y;
+            testPos.y += stepY;
+            rayLength = currentYRayLength;
+            currentYRayLength += unitStepValues.y;
         } else
         {
-            testPos.x += diffX;
-            currentXLength += scaleValues.x;
-            testPos.y += diffY;
-            currentYLength += scaleValues.y;
+            testPos.x += stepX;
+            currentXRayLength += unitStepValues.x;
+            testPos.y += stepY;
+            rayLength = currentYRayLength;
+            currentYRayLength += unitStepValues.y;
         }
 
-        if (hit)
+        if (map.getMapDataFromRelPos(testPos))
         {
             break;
         }
-
-        if (map.getMapDataFromRelPos(testPos) != 0)
-        {
-            hit = true;
-        }
-        pathCrossingResult.push_back(testPos);
     }
 
-    return pathCrossingResult;
+    return Vector2Add(startPoint, Vector2Multiply(rayDirection, {rayLength, rayLength}));
 }
