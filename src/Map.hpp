@@ -10,7 +10,7 @@
 constexpr int MAP_SIZE_HORIZONTAL = 10;
 constexpr int MAP_SIZE_VERTICAL = 10;
 constexpr int MAP_SQUARE_SIZE = 40;
-constexpr int MAP_GAP_SIZE = 5;
+constexpr int MAP_GAP_SIZE = 3;
 
 typedef std::size_t MapSizeType;
 typedef uint8_t MapDataType;

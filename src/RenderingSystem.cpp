@@ -1,5 +1,7 @@
 #include "RenderingSystem.hpp"
 
+#include "raycasting.hpp"
+
 void RenderingSystem::render() const
 {
     BeginDrawing();
@@ -26,6 +28,12 @@ void RenderingSystem::render() const
     }
 
     this->player.draw();
+
+    // Draw ray intersection
+    auto relativeRayIntersection = cast_ray(this->map, this->player.getPositionRelativeToMap(), get_position_relative_to_map(this->player.getRotationAsNonNormalizedVector()));
+    auto rayIntersection = get_absolute_position_on_map(relativeRayIntersection);
+    DrawLineV(this->player.pos, rayIntersection, YELLOW);
+    DrawCircleV(rayIntersection, 2, GREEN);
 
     DrawFPS(10, 10);
 
