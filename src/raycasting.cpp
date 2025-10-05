@@ -1,14 +1,18 @@
 #include "raycasting.hpp"
 
+#include <iostream>
+
 #include "raymath.h"
-#include "utils.hpp"
 
 Vector2 cast_ray(const Map& map, const Vector2 startPoint, const Vector2 directionPoint)
 {
     auto rayDirection = Vector2Normalize(Vector2Subtract(directionPoint, startPoint));
-    auto unitStepValues = Vector2{fabsf(sqrtf(1 + powf(rayDirection.y / rayDirection.x, 2))), fabsf(sqrtf(1 + powf(rayDirection.x / rayDirection.y, 2)))};
+    auto unitStepValues = Vector2{
+        std::fabsf(std::sqrtf(1 + std::powf(rayDirection.y / rayDirection.x, 2))),
+        std::fabsf(std::sqrtf(1 + std::powf(rayDirection.x / rayDirection.y, 2)))
+    };
 
-    auto testPos = Vector2{floor(startPoint.x), floor(startPoint.y)};
+    auto testPos = Vector2{std::floor(startPoint.x), std::floor(startPoint.y)};
 
     float currentXRayLength;
     float currentYRayLength;
