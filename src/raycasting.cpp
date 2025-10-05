@@ -19,43 +19,33 @@ Vector2 cast_ray(const Map& map, const Vector2 startPoint, const Vector2 directi
     float stepX;
     float stepY;
 
-    if (rayDirection.x < 0)
-    {
+    if (rayDirection.x < 0) {
         stepX = -1;
         currentXRayLength = (startPoint.x - testPos.x) * unitStepValues.x;
-    }
-    else
-    {
+    } else {
         stepX = 1;
         currentXRayLength = (testPos.x + 1 - startPoint.x) * unitStepValues.x;
     }
 
-    if (rayDirection.y < 0)
-    {
+    if (rayDirection.y < 0) {
         stepY = -1;
         currentYRayLength = (startPoint.y - testPos.y) * unitStepValues.y;
-    }
-    else
-    {
+    } else {
         stepY = 1;
         currentYRayLength = (testPos.y + 1 - startPoint.y) * unitStepValues.y;
     }
 
     float rayLength = 0;
-    while (testPos.x < map.getHorizontalSize() && testPos.y < map.getVerticalSize())
-    {
-        if (currentXRayLength < currentYRayLength)
-        {
+    while (testPos.x < map.getHorizontalSize() && testPos.y < map.getVerticalSize()) {
+        if (currentXRayLength < currentYRayLength) {
             testPos.x += stepX;
             rayLength = currentXRayLength;
             currentXRayLength += unitStepValues.x;
-        } else if (currentXRayLength > currentYRayLength)
-        {
+        } else if (currentXRayLength > currentYRayLength) {
             testPos.y += stepY;
             rayLength = currentYRayLength;
             currentYRayLength += unitStepValues.y;
-        } else
-        {
+        } else {
             testPos.x += stepX;
             currentXRayLength += unitStepValues.x;
             testPos.y += stepY;
@@ -63,8 +53,7 @@ Vector2 cast_ray(const Map& map, const Vector2 startPoint, const Vector2 directi
             currentYRayLength += unitStepValues.y;
         }
 
-        if (map.getMapDataFromRelPos(testPos))
-        {
+        if (map.getMapDataFromRelPos(testPos)) {
             break;
         }
     }

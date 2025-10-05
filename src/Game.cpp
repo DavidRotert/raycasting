@@ -11,15 +11,11 @@ Game::Game(Player& player, Map& map) :
 
 void Game::gameLoop()
 {
-    while (!WindowShouldClose())
-    {
+    while (!WindowShouldClose()) {
         // Move and rotate
-        if (IsKeyDown(KEY_RIGHT))
-        {
+        if (IsKeyDown(KEY_RIGHT)) {
             player.rotate(-1 * DEG2RAD);
-        }
-        else if (IsKeyDown(KEY_LEFT))
-        {
+        } else if (IsKeyDown(KEY_LEFT)) {
             player.rotate(1 * DEG2RAD);
         }
 

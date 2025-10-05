@@ -8,13 +8,11 @@ void RenderingSystem::render() const
 
     ClearBackground(BLACK);
 
-    for (int i = 0; i < MAP_SIZE_VERTICAL * MAP_SIZE_HORIZONTAL; i++)
-    {
+    for (int i = 0; i < MAP_SIZE_VERTICAL * MAP_SIZE_HORIZONTAL; i++) {
         const MapDataType mapData = map.getMapDataAtIndex(i);
 
         Color color = GRAY;
-        if (mapData != 0)
-        {
+        if (mapData != 0) {
             color = WHITE;
         }
 
@@ -30,7 +28,11 @@ void RenderingSystem::render() const
     this->player.draw();
 
     // Draw ray intersection
-    auto relativeRayIntersection = cast_ray(this->map, this->player.getPositionRelativeToMap(), get_position_relative_to_map(this->player.getRotationAsNonNormalizedVector()));
+    auto relativeRayIntersection = cast_ray(
+        this->map,
+        this->player.getPositionRelativeToMap(),
+        get_position_relative_to_map(this->player.getRotationAsNonNormalizedVector())
+    );
     auto rayIntersection = get_absolute_position_on_map(relativeRayIntersection);
     DrawLineV(this->player.pos, rayIntersection, YELLOW);
     DrawCircleV(rayIntersection, 2, GREEN);

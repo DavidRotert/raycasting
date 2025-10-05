@@ -7,8 +7,7 @@
 
 MapDataType Map::getMapDataAtIndex(std::size_t pos) const
 {
-    if (pos >= this->mapData.size())
-    {
+    if (pos >= this->mapData.size()) {
         throw std::out_of_range(std::format("{} is out of bounds, maximum index is {}", pos, this->mapData.size()));
     }
     return this->mapData[pos];

@@ -8,14 +8,11 @@ void Player::rotate(radian angle)
 {
     radian newAngle = this->rotationAngleRadian + angle;
 
-    if (newAngle < 0)
-    {
+    if (newAngle < 0) {
         this->rotationAngleRadian = 2 * PI + angle;
-    } else if (newAngle > 2 * PI)
-    {
+    } else if (newAngle > 2 * PI) {
         this->rotationAngleRadian = newAngle - 2 * PI;
-    } else
-    {
+    } else {
         this->rotationAngleRadian = newAngle;
     }
 }

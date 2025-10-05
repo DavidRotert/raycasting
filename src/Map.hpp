@@ -23,9 +23,9 @@ class Map
 
 public:
     Map(const MapSizeType horizontalSize, const MapSizeType verticalSize, const std::span<MapDataType> mapData) :
-        mapData(mapData), horizontalSize(horizontalSize), verticalSize(verticalSize)
-    {
-    }
+        mapData(mapData),
+        horizontalSize(horizontalSize),
+        verticalSize(verticalSize) {}
 
     MapSizeType getHorizontalSize() const { return horizontalSize; }
     MapSizeType getVerticalSize() const { return verticalSize; }

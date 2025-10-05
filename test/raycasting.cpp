@@ -4,7 +4,11 @@
 
 #include "catch2/catch_test_macros.hpp"
 
-TEST_CASE("Raycasting test south east", "[raycasting]")
+TEST_CASE (
+"Raycasting test south east"
+,
+"[raycasting]"
+)
 {
     auto mapData = std::array<MapDataType, 7 * 4>{
         0, 0, 0, 1, 1, 1, 1,
@@ -19,7 +23,11 @@ TEST_CASE("Raycasting test south east", "[raycasting]")
     REQUIRE(actual.y == expected.y);
 }
 
-TEST_CASE("Raycasting test south west", "[raycasting]")
+TEST_CASE (
+"Raycasting test south west"
+,
+"[raycasting]"
+)
 {
     auto mapData = std::array<MapDataType, 7 * 4>{
         1, 1, 1, 1, 1, 1, 1,
@@ -34,7 +42,11 @@ TEST_CASE("Raycasting test south west", "[raycasting]")
     REQUIRE(actual.y == expected.y);
 }
 
-TEST_CASE("Raycasting test north east", "[raycasting]")
+TEST_CASE (
+"Raycasting test north east"
+,
+"[raycasting]"
+)
 {
     auto mapData = std::array<MapDataType, 7 * 4>{
         1, 1, 1, 1, 1, 1, 1,
@@ -49,7 +61,11 @@ TEST_CASE("Raycasting test north east", "[raycasting]")
     REQUIRE(actual.y == expected.y);
 }
 
-TEST_CASE("Raycasting test north west", "[raycasting]")
+TEST_CASE (
+"Raycasting test north west"
+,
+"[raycasting]"
+)
 {
     auto mapData = std::array<MapDataType, 7 * 4>{
         1, 1, 1, 1, 1, 1, 1,
@@ -64,7 +80,11 @@ TEST_CASE("Raycasting test north west", "[raycasting]")
     REQUIRE(actual.y == expected.y);
 }
 
-TEST_CASE("Raycasting test south east diagonal", "[raycasting]")
+TEST_CASE (
+"Raycasting test south east diagonal"
+,
+"[raycasting]"
+)
 {
     auto mapData = std::array<MapDataType, 7 * 7>{
         0, 1, 1, 1, 1, 1, 1,
@@ -82,7 +102,11 @@ TEST_CASE("Raycasting test south east diagonal", "[raycasting]")
     REQUIRE(actual.y == expected.y);
 }
 
-TEST_CASE("Raycasting test x axis alignment", "[raycasting]")
+TEST_CASE (
+"Raycasting test x axis alignment"
+,
+"[raycasting]"
+)
 {
     auto mapData = std::array<MapDataType, 7 * 7>{
         1, 0, 0, 0, 0, 1, 1,
@@ -100,7 +124,11 @@ TEST_CASE("Raycasting test x axis alignment", "[raycasting]")
     REQUIRE(actual.y == expected.y);
 }
 
-TEST_CASE("Raycasting test y axis alignment", "[raycasting]")
+TEST_CASE (
+"Raycasting test y axis alignment"
+,
+"[raycasting]"
+)
 {
     auto mapData = std::array<MapDataType, 7 * 7>{
         1, 1, 1, 1, 1, 1, 1,
