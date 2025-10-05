@@ -1,5 +1,4 @@
-#ifndef RAYCASTING_GAME_HPP
-#define RAYCASTING_GAME_HPP
+#pragma once
 
 #include "Player.hpp"
 #include "Map.hpp"
@@ -18,6 +17,3 @@ public:
     Game(Player& player, Map& map);
     void gameLoop();
 };
-
-
-#endif //RAYCASTING_GAME_HPP

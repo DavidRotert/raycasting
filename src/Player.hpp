@@ -1,5 +1,4 @@
-#ifndef RAYCASTING_PLAYER_HPP
-#define RAYCASTING_PLAYER_HPP
+#pragma once
 
 #include "raylib.h"
 #include "Map.hpp"
@@ -19,5 +18,3 @@ struct Player
     Vector2 getPositionRelativeToMap() const;
     void draw() const;
 };
-
-#endif //RAYCASTING_PLAYER_HPP

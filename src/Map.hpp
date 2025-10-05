@@ -1,5 +1,4 @@
-#ifndef MAP_HPP
-#define MAP_HPP
+#pragma once
 
 #include <array>
 #include <cstdint>
@@ -38,5 +37,3 @@ public:
 
 Vector2 get_position_relative_to_map(Vector2 pos);
 Vector2 get_absolute_position_on_map(Vector2 relative);
-
-#endif // MAP_HPP
