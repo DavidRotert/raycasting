@@ -6,14 +6,15 @@
 
 #include "raylib.h"
 
-constexpr int MAP_SIZE_HORIZONTAL = 10;
-constexpr int MAP_SIZE_VERTICAL = 10;
-constexpr int MAP_SQUARE_SIZE = 40;
-constexpr int MAP_GAP_SIZE = 3;
+constexpr int MAP_GRID_SIZE_HORIZONTAL = 10;
+constexpr int MAP_GRID_SIZE_VERTICAL = 10;
+
+constexpr int MAP_GRID_SQUARE_SIZE = 30;
+constexpr int MAP_GRID_GAP_SIZE = 1;
 
 typedef std::size_t MapSizeType;
 typedef uint8_t MapDataType;
-typedef std::array<MapDataType, MAP_SIZE_HORIZONTAL * MAP_SIZE_VERTICAL> Maps;
+typedef std::array<MapDataType, MAP_GRID_SIZE_HORIZONTAL * MAP_GRID_SIZE_VERTICAL> Maps;
 
 class Map
 {

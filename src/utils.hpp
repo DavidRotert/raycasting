@@ -6,3 +6,5 @@
 #define VECTOR2_UP(value) Vector2{0, -value}
 
 typedef float radian;
+
+radian absolute_radian(radian angle);

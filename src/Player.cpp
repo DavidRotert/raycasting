@@ -22,12 +22,7 @@ Vector2 Player::getPositionRelativeToMap() const
     return get_position_relative_to_map(this->pos);
 }
 
-void Player::draw() const
+Vector2 Player::getRotationAsNonNormalizedVector(const radian rotation) const
 {
-    DrawCircleV(this->pos, MAP_SQUARE_SIZE * 0.3, PLAYER_COLOR);
-}
-
-Vector2 Player::getRotationAsNonNormalizedVector()
-{
-    return Vector2Add(this->pos, Vector2{cosf(this->rotationAngleRadian), sinf(this->rotationAngleRadian)});
+    return Vector2Add(this->pos, Vector2{cosf(rotation), sinf(rotation)});
 }

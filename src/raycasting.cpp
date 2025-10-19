@@ -4,7 +4,7 @@
 
 #include "raymath.h"
 
-Vector2 cast_ray(const Map& map, const Vector2 startPoint, const Vector2 directionPoint)
+RayCastResult cast_ray(const Map& map, const Vector2 startPoint, const Vector2 directionPoint)
 {
     auto rayDirection = Vector2Normalize(Vector2Subtract(directionPoint, startPoint));
     auto unitStepValues = Vector2{
@@ -36,6 +36,7 @@ Vector2 cast_ray(const Map& map, const Vector2 startPoint, const Vector2 directi
     }
 
     float rayLength = 0;
+    MapDataType rayMapHit = 0;
     while (testPos.x < map.getHorizontalSize() && testPos.y < map.getVerticalSize()) {
         if (currentXRayLength < currentYRayLength) {
             testPos.x += stepX;
@@ -53,10 +54,15 @@ Vector2 cast_ray(const Map& map, const Vector2 startPoint, const Vector2 directi
             currentYRayLength += unitStepValues.y;
         }
 
-        if (map.getMapDataFromRelPos(testPos)) {
+        rayMapHit = map.getMapDataFromRelPos(testPos);
+        if (rayMapHit != 0) {
             break;
         }
     }
 
-    return Vector2Add(startPoint, Vector2Multiply(rayDirection, {rayLength, rayLength}));
+    return RayCastResult{
+        Vector2Add(startPoint, Vector2Multiply(rayDirection, {rayLength, rayLength})),
+        rayMapHit,
+        rayLength
+    };
 }
