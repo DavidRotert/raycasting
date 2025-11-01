@@ -4,8 +4,8 @@
 #include "raycasting.hpp"
 #include "raymath.h"
 
-constexpr float DARKNESS_FACTOR = 13.0;
-constexpr float PIXEL_COLUMN_HEIGHT_FACTOR = 1.3;
+constexpr float DARKNESS_FACTOR = 10;
+constexpr float PIXEL_COLUMN_HEIGHT_FACTOR = 1.5;
 
 RenderingSystem::RenderingSystem(const Player& player, const Map& map): player(player), map(map) {}
 
@@ -55,7 +55,7 @@ void RenderingSystem::render(const std::vector<RayCastResult>& rayCastResults) c
                 Vector2{static_cast<float>(WINDOW_DEBUG_AREA_WIDTH + i),static_cast<float>(WINDOW_HEIGHT / 2)},
                 Vector2{0, pixelColumnHeight / 2}
             ),
-            ColorBrightness(BROWN, -(rayLength / DARKNESS_FACTOR))
+            ColorBrightness(WHITE, -(rayLength / DARKNESS_FACTOR))
         );
 
         // Render 2D debug map
