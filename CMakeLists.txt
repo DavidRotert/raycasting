@@ -22,7 +22,7 @@ set(SHARED_SOURCES
         src/Player.cpp
         src/Map.cpp
         src/RenderingSystem.cpp
-    src/RaycastingSystem.cpp
+        src/RaycastingSystem.cpp
         src/raycasting.cpp
 )
 
