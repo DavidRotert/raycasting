@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-constexpr int PLAYER_MOVEMENT_SPEED = 1;
+constexpr int PLAYER_MOVEMENT_SPEED = 2;
 
 Game::Game(const Player& player, const Map& map):
     player(player),
@@ -35,9 +35,13 @@ void Game::gameLoop()
         }*/
 
         if (IsKeyDown(KEY_W)) {
-            player.moveForward(movementDelta);
-        } if (IsKeyDown(KEY_S)) {
-            player.moveForward(-movementDelta);
+            player.move(movementDelta, this->player.rotationAngleRadian);
+        } else if (IsKeyDown(KEY_S)) {
+            player.move(movementDelta, absolute_radian(this->player.rotationAngleRadian - 180 * DEG2RAD));
+        } else if (IsKeyDown(KEY_A)) {
+            player.move(movementDelta, absolute_radian(this->player.rotationAngleRadian - 90 * DEG2RAD));
+        } else if (IsKeyDown(KEY_D)) {
+            player.move(movementDelta, absolute_radian(this->player.rotationAngleRadian + 90 * DEG2RAD));
         }
 
         this->raycastingSystem.calculateRays();

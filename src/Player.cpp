@@ -9,9 +9,17 @@ void Player::move(Vector2 delta)
     this->position = Vector2Add(position, delta);
 }
 
-void Player::moveForward(float delta)
+void Player::move(const float delta, const radian rotation)
 {
-    this->position = Vector2Add(this->position, Vector2Multiply(this->getRotationAsNonNormalizedVector(this->rotationAngleRadian), Vector2{delta, delta}));
+    this->move(
+        Vector2Multiply(
+            Vector2Subtract(
+                this->getRotationAsNonNormalizedVector(rotation),
+                this->position
+            ),
+            Vector2{delta, delta}
+        )
+    );
 }
 
 void Player::rotate(radian angle)
