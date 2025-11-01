@@ -34,7 +34,7 @@ void RenderingSystem::render(const std::vector<RayCastResult>& rayCastResults) c
     }
 
     // Draw 2D debug player
-    DrawCircleV(this->player.pos, MAP_GRID_SQUARE_SIZE * 0.3, GREEN);
+    DrawCircleV(this->player.getDebugGridPosition(), MAP_GRID_SQUARE_SIZE * 0.3, GREEN);
 
     // Draw rays
     radian startAngle = absolute_radian(this->player.rotationAngleRadian - (this->player.fov / 2));
@@ -59,7 +59,7 @@ void RenderingSystem::render(const std::vector<RayCastResult>& rayCastResults) c
         );
 
         // Render 2D debug map
-        DrawLineV(this->player.pos, rayIntersection, YELLOW);
+        DrawLineV(this->player.getDebugGridPosition(), rayIntersection, YELLOW);
         DrawCircleV(rayIntersection, 2, GREEN);
     }
 

@@ -10,13 +10,14 @@ constexpr float PLAYER_DEBUG_RAY_LENGTH = 5 * (MAP_GRID_SQUARE_SIZE + MAP_GRID_G
 
 struct Player
 {
-    Vector2 pos;
+    Vector2 position;
     radian rotationAngleRadian;
     radian fov;
 
 
     void rotate(radian angle);
     void move(Vector2 delta);
+    void moveForward(float delta);
     Vector2 getRotationAsNonNormalizedVector(radian rotation) const;
-    Vector2 getPositionRelativeToMap() const;
+    Vector2 getDebugGridPosition() const;
 };

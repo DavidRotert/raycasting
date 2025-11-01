@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-constexpr int PLAYER_MOVEMENT_SPEED = 50;
+constexpr int PLAYER_MOVEMENT_SPEED = 1;
 
 Game::Game(const Player& player, const Map& map):
     player(player),
@@ -24,7 +24,7 @@ void Game::gameLoop()
 
         // Move Player
         float movementDelta = GetFrameTime() * PLAYER_MOVEMENT_SPEED;
-        if (IsKeyDown(KEY_W)) {
+        /*if (IsKeyDown(KEY_W)) {
             player.move(VECTOR2_UP(movementDelta));
         } else if (IsKeyDown(KEY_S)) {
             player.move(VECTOR2_DOWN(movementDelta));
@@ -32,6 +32,12 @@ void Game::gameLoop()
             player.move(VECTOR2_LEFT(movementDelta));
         } else if (IsKeyDown(KEY_D)) {
             player.move(VECTOR2_RIGHT(movementDelta));
+        }*/
+
+        if (IsKeyDown(KEY_W)) {
+            player.moveForward(movementDelta);
+        } if (IsKeyDown(KEY_S)) {
+            player.moveForward(-movementDelta);
         }
 
         this->raycastingSystem.calculateRays();

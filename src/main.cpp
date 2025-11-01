@@ -12,8 +12,8 @@ int main()
 
     auto player = Player{
         Vector2{
-            7 * (MAP_GRID_SQUARE_SIZE + MAP_GRID_GAP_SIZE) + MAP_GRID_SQUARE_SIZE / 2.0,
-            2 * (MAP_GRID_SQUARE_SIZE + MAP_GRID_GAP_SIZE) + MAP_GRID_SQUARE_SIZE / 2.0
+            7,
+            2
         },
         0 * DEG2RAD,
         60 * DEG2RAD

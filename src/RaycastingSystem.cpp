@@ -24,8 +24,8 @@ void RaycastingSystem::calculateRays()
 
         RayCastResult rayCastResult = cast_ray(
             this->map,
-            this->player.getPositionRelativeToMap(),
-            get_position_relative_to_map(this->player.getRotationAsNonNormalizedVector(currentAbsoluteAngle))
+            this->player.position,
+            this->player.getRotationAsNonNormalizedVector(currentAbsoluteAngle)
         );
         rayCastResult.rayLength = std::cos(currentAngleRelativeToCamera) * rayCastResult.rayLength;
         this->rayCastResults.push_back(rayCastResult);

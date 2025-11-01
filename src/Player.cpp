@@ -6,7 +6,12 @@
 
 void Player::move(Vector2 delta)
 {
-    this->pos = Vector2Add(pos, delta);
+    this->position = Vector2Add(position, delta);
+}
+
+void Player::moveForward(float delta)
+{
+    this->position = Vector2Add(this->position, Vector2Multiply(this->getRotationAsNonNormalizedVector(this->rotationAngleRadian), Vector2{delta, delta}));
 }
 
 void Player::rotate(radian angle)
@@ -22,12 +27,12 @@ void Player::rotate(radian angle)
     }
 }
 
-Vector2 Player::getPositionRelativeToMap() const
+Vector2 Player::getDebugGridPosition() const
 {
-    return get_position_relative_to_map(this->pos);
+    return get_absolute_position_on_map(this->position);
 }
 
 Vector2 Player::getRotationAsNonNormalizedVector(const radian rotation) const
 {
-    return Vector2Add(this->pos, Vector2{cosf(rotation), sinf(rotation)});
+    return Vector2Add(this->position, Vector2{cosf(rotation), sinf(rotation)});
 }
