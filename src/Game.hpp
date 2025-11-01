@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Player.hpp"
 #include "Map.hpp"
+#include "Player.hpp"
+#include "RaycastingSystem.hpp"
 #include "RenderingSystem.hpp"
 
 constexpr int RESOLUTION = 800;
@@ -12,10 +13,11 @@ constexpr int WINDOW_HEIGHT = 600;
 class Game
 {
     Player player;
-    Map map;
+    const Map map;
+    RaycastingSystem raycastingSystem;
     RenderingSystem renderingSystem;
 
 public:
-    Game(Player& player, Map& map);
+    Game(const Player& player, const Map& map);
     void gameLoop();
 };

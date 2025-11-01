@@ -1,4 +1,4 @@
-#include <iostream>
+#include <print>
 
 #include "raylib.h"
 
@@ -8,13 +8,15 @@
 
 int main()
 {
+    std::print("Hello World!\n");
+
     auto player = Player{
         Vector2{
             7 * (MAP_GRID_SQUARE_SIZE + MAP_GRID_GAP_SIZE) + MAP_GRID_SQUARE_SIZE / 2.0,
             2 * (MAP_GRID_SQUARE_SIZE + MAP_GRID_GAP_SIZE) + MAP_GRID_SQUARE_SIZE / 2.0
         },
         0 * DEG2RAD,
-        70 * DEG2RAD
+        60 * DEG2RAD
     };
     auto mapData = std::array<MapDataType, MAP_GRID_SIZE_HORIZONTAL * MAP_GRID_SIZE_VERTICAL>{
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1,

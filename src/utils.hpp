@@ -7,4 +7,9 @@
 
 typedef float radian;
 
+/**
+ * Gets the absolute radian so that radian values can be smaller than 0 and larger than 2PI. It makes calculations easier.
+ * @param angle
+ * @return
+ */
 radian absolute_radian(radian angle);

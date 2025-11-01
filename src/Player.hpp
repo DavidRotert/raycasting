@@ -16,6 +16,7 @@ struct Player
 
 
     void rotate(radian angle);
+    void move(Vector2 delta);
     Vector2 getRotationAsNonNormalizedVector(radian rotation) const;
     Vector2 getPositionRelativeToMap() const;
 };

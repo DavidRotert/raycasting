@@ -1,16 +1,19 @@
-#ifndef RAYCASTING_RENDERINGSYSTEM_H
-#define RAYCASTING_RENDERINGSYSTEM_H
+#pragma once
+
+#include <vector>
 
 #include "Player.hpp"
 #include "Map.hpp"
+#include "raycasting.hpp"
 
 
-struct RenderingSystem
+class RenderingSystem
 {
-    Player& player;
-    Map& map;
+    const Player& player;
+    const Map& map;
 
-    void render() const;
+public:
+    RenderingSystem(const Player& player, const Map& map);
+
+    void render(const std::vector<RayCastResult>& rayCastResults) const;
 };
-
-#endif //RAYCASTING_RENDERINGSYSTEM_H

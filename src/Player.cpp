@@ -4,6 +4,11 @@
 #include "raymath.h"
 #include "utils.hpp"
 
+void Player::move(Vector2 delta)
+{
+    this->pos = Vector2Add(pos, delta);
+}
+
 void Player::rotate(radian angle)
 {
     radian newAngle = this->rotationAngleRadian + angle;
